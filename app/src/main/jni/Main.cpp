@@ -65,9 +65,6 @@ void Changes(JNIEnv *env, jclass clazz, jobject obj,
         case 3:
             EspObject = boolean;
             break;
-            
-            
-            
         case 4:
             GodMode = boolean;
             break;

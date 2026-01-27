@@ -4,6 +4,7 @@ plugins {
 
 android {
     compileSdkVersion 34
+    namespace 'com.android.support'
     defaultConfig {
         applicationId "com.android.support"
         minSdkVersion 21
@@ -31,7 +32,6 @@ android {
             path file('src/main/jni/Android.mk')
         }
     }
-    namespace 'com.android.support'
 }
 
 //dependencies must be placed below 'android' brackets to get it work on AIDE

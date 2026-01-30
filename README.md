@@ -3,8 +3,8 @@
 
 [![License Info](https://img.shields.io/badge/License-GPL--3.0-blue.svg?style=flat-square)](https://github.com/FlutterGenerator/SpecimenZero/blob/master/LICENSE)
 
-# SpecimenZero Version: (34) – 1.1.1
-**Google Play Release Date:** 8 June 2024
+# SpecimenZero Version: (49) – 1.1.1
+**Google Play Release Date:** 17 December 2025
 
 ![](img.jpg)
 

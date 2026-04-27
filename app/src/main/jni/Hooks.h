@@ -107,9 +107,9 @@ void DrawESP(ESP esp, int screenWidth, int screenHeight) {
         if (i < players.size()) Player = players[i];      
         if (Player != NULL && get_camera() != NULL) {  
         
-            int get_height = *(int*) (getAbsoluteAddress("libil2cpp.so",0x1D0C0D0));
-            int get_width = *(int*) (getAbsoluteAddress("libil2cpp.so",0x1D0C090));
-            auto SetResolution = (void (*)(int, int, bool)) (getAbsoluteAddress("libil2cpp.so",0x1D0C34C));
+            int get_width = *(int*) (getAbsoluteAddress("libil2cpp.so",0x1D11DF8));
+            int get_height = *(int*) (getAbsoluteAddress("libil2cpp.so",0x1D11E38));
+            auto SetResolution = (void (*)(int, int, bool)) (getAbsoluteAddress("libil2cpp.so",0x1D120B4));
             SetResolution(screenWidth, screenHeight, true);
      
             get_height = screenHeight;   
@@ -120,12 +120,10 @@ void DrawESP(ESP esp, int screenWidth, int screenHeight) {
             
             Vector3 HeadPos = getPosition(Player);  
             Vector3 Head = Vector3(HeadPos.x, HeadPos.y + 0.6,HeadPos.z);
-           
-          
+            
             Vector3 BottomPos = getPosition(Player);
             Vector3 Bottom = Vector3(BottomPos.x, BottomPos.y - 1.2,BottomPos.z);
-              
-         
+            
             auto HeadPosition = worldToScreen(get_camera(),Head);
             auto BottomPosition = worldToScreen(get_camera(),Bottom);  
             
@@ -138,7 +136,6 @@ void DrawESP(ESP esp, int screenWidth, int screenHeight) {
             float isBoxWidth = (float) screenWidth / 10.0f;
             float isBoxHeight = (float) screenHeight / 8.0f;
 
-  
             if (EspLine) {                 
                 esp.DrawLine(Color::White(), 1,Vector2(screenWidth / 2, 0),Vector2(HeadPosition.x,screenHeight - HeadPosition.y - 45 )); 
             }       
@@ -190,29 +187,29 @@ void MainThread() {
 
     // Structur
     // public class UnityEngine.Component : UnityEngine.Object public UnityEngine.Transform get_transform();
-    get_transform = (void *(*)(void *)) getAbsoluteAddress(libName,0x1D2AD74);
+    get_transform = (void *(*)(void *)) getAbsoluteAddress(libName,0x1D30ADC);
     
     // public struct UnityEngine.Vector3 get_position();
-    get_position = (Vector3 (*)(void*)) getAbsoluteAddress(libName,0x1D38C58);
+    get_position = (Vector3 (*)(void*)) getAbsoluteAddress(libName,0x1D3E9C0);
     
     // public static UnityEngine.Camera get_main();
-    get_camera = (void *(*)()) getAbsoluteAddress(libName,0x1D01EC0);
+    get_camera = (void *(*)()) getAbsoluteAddress(libName,0x1D07C28);
     
     // public struct UnityEngine.Vector3 WorldToScreenPoint(struct UnityEngine.Vector3 position);
-    worldToScreen = (Vector3 (*)(void *, Vector3)) getAbsoluteAddress(libName,0x1D01B80);
+    worldToScreen = (Vector3 (*)(void *, Vector3)) getAbsoluteAddress(libName,0x1D078E8);
     
     // Entity List public class EnemyNavigation private void Update() { } private System.Void Update();
-    MSHookFunction((void *) getAbsoluteAddress(libName,0x8B2638),(void *) &new_EnemyEntity, (void **) &org_EnemyEntity);
+    MSHookFunction((void *) getAbsoluteAddress(libName,0x8B52B8),(void *) &new_EnemyEntity, (void **) &org_EnemyEntity);
     
     // Entity List public class SubSpecimenNavigation private void Update() { } private System.Void Update();
-    MSHookFunction((void *) getAbsoluteAddress(libName,0x8BCC64),(void *) &new_SpecimenEntity,(void **) &org_SpecimenEntity); 
+    MSHookFunction((void *) getAbsoluteAddress(libName,0x8BF8E4),(void *) &new_SpecimenEntity,(void **) &org_SpecimenEntity); 
     
     // Feature public System.Void TakeDamage(System.Int32 amount, System.Int32 specimenType, System.Boolean isKillByBoss);
-    MSHookFunction((void *) getAbsoluteAddress(libName,0x903BFC),(void *) &new_TakeDamage,(void **) &org_TakeDamage);
+    MSHookFunction((void *) getAbsoluteAddress(libName,0x90687C),(void *) &new_TakeDamage,(void **) &org_TakeDamage);
     
     // Entity List public class EnemyNavigation private System.Void Chasing();
-    MSHookFunction((void *) getAbsoluteAddress(libName,0x8B3730),(void *) &new_isChasing,(void **) &org_isChasing);
+    MSHookFunction((void *) getAbsoluteAddress(libName,0x8B63B0),(void *) &new_isChasing,(void **) &org_isChasing);
     
     // public class PlayerItems : UnityEngine.MonoBehaviour public System.Void UpdateItems();
-    MSHookFunction((void *) getAbsoluteAddress(libName,0x908900),(void *) &new_PlayerItems,(void **) &org_PlayerItems);
+    MSHookFunction((void *) getAbsoluteAddress(libName,0x90B580),(void *) &new_PlayerItems,(void **) &org_PlayerItems);
 }
